@@ -7,12 +7,15 @@
 #include <tchar.h>
 #include <conio.h>
 #include <Windows.h>
+#include <cstdlib>
 #include "Pitanja.h" // Klase za pitanja
 
 using namespace std;
 
 ifstream File;// File za pitanja
+ofstream scoresFile;
 HANDLE hConsole;// Handle za konzolu
+COORD max_size;
 vector<Pitanje> pitanja;// lista pitanja
 
 void ParseQ()// Cita pitanja i odgovore iz fajla
@@ -34,21 +37,45 @@ void ParseQ()// Cita pitanja i odgovore iz fajla
 	}
 }
 
+void Center(string item, int i) 
+{
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(hConsole, &csbi);
+	auto columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+	auto rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+	GetConsoleScreenBufferInfo(hConsole, &csbi);
+	csbi.dwCursorPosition.X = (columns - strlen(item.c_str())) / 2;
+	csbi.dwCursorPosition.Y = (rows / 2) - 2 + 2*i;
+	SetConsoleCursorPosition(hConsole, csbi.dwCursorPosition);
+}
+
+void Center()
+{
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(hConsole, &csbi);
+	auto columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+	GetConsoleScreenBufferInfo(hConsole, &csbi);
+	csbi.dwCursorPosition.X = (columns - 120) / 2;
+	SetConsoleCursorPosition(hConsole, csbi.dwCursorPosition);
+}
+
 void PrintMenu(int choice)// printa meni i ASCII art :)
 {
-	string menu[3] = { "Become a millionaire!", "Highscores", "Quit" };
+	string menu[3] = { "Play", "Highscores", "Quit" };
 	system("cls");
-	cout << "__________                                                      __ __   __   __                      __               \n";
-	cout << "\\______   \\ ____  ____  ____   _____   ____   _____      _____ |__|  | |  | |__| ____   ____ _____  |__|______  ____  \n";
-	cout << " |    |  _// __ \\/ ___\\/  _ \\ /     \\_/ __ \\  \\__  \\    /     \\|  |  | |  | |  |/  _ \\ /    \\\\__  \\ |  \\_  __ \\/ __ \\ \n";
-	cout << " |    |   \\  ___|  \\__(  <_> )  Y Y  \\  ___/   / __ \\_ |  Y Y  \\  |  |_|  |_|  (  <_> )   |  \\/ __ \\|  ||  | \\|  ___/ \n";
-	cout << " |______  /\\___  >___  >____/|__|_|  /\\___  > (____  / |__|_|  /__|____/____/__|\\____/|___|  (____  /__||__|   \\___  >\n";
-	cout << "        \\/     \\/    \\/            \\/     \\/       \\/        \\/                            \\/     \\/               \\/ \n";
+	cout << endl;
+	Center(); cout << "__________                                                      __ __   __   __                      __               \n";
+	Center(); cout << "\\______   \\ ____  ____  ____   _____   ____   _____      _____ |__|  | |  | |__| ____   ____ _____  |__|______  ____  \n";
+	Center(); cout << " |    |  _// __ \\/ ___\\/  _ \\ /     \\_/ __ \\  \\__  \\    /     \\|  |  | |  | |  |/  _ \\ /    \\\\__  \\ |  \\_  __ \\/ __ \\ \n";
+	Center(); cout << " |    |   \\  ___|  \\__(  <_> )  Y Y  \\  ___/   / __ \\_ |  Y Y  \\  |  |_|  |_|  (  <_> )   |  \\/ __ \\|  ||  | \\|  ___/ \n";
+	Center(); cout << " |______  /\\___  >___  >____/|__|_|  /\\___  > (____  / |__|_|  /__|____/____/__|\\____/|___|  (____  /__||__|   \\___  >\n";
+	Center(); cout << "        \\/     \\/    \\/            \\/     \\/       \\/        \\/                            \\/     \\/               \\/ \n";
 	for (auto i = 0; i < 3; i++)
 	{
 		if (choice == i)
 			SetConsoleTextAttribute(hConsole, 240);//Ako je to izabrano oboji ga
-		cout << menu[i] << endl;
+		Center(menu[i], i);
+		cout << menu[i];
 		SetConsoleTextAttribute(hConsole, 15);//Ovo ostalo vrati na staru boju
 	}
 }
@@ -75,12 +102,29 @@ int MainMenu()// Funkcija za meni
 	return choice;// vraca odabir
 }
 
+void Game()
+{
+	
+}
+
+void DisplayHighScores()
+{
+	
+}
+
 int main()
 {
 	File.open("Pitanja.txt");
 	ParseQ();
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	// potrebno za meni
-	MainMenu();
-    return 0;
+	switch (MainMenu())
+	{
+	case 1:
+		Game();
+	case 2:
+		DisplayHighScores();
+	case 3:
+		return 0;
+	}
 }
 
