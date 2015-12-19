@@ -3,9 +3,9 @@
 #include <string>
 #include <fstream>
 #include <tchar.h>
-#include <conio.h>
 #include <Windows.h>
 #include <cstdlib>
+#include <conio.h>
 #include "Pitanja.h" // Klase za pitanja
 #include <algorithm>
 
@@ -109,7 +109,7 @@ void PrintAscii()
 int MainMenu()// Funkcija za meni
 {
 	auto choice = 0;
-	int key = 0;
+	auto key = 0;
 	CONSOLE_SCREEN_BUFFER_INFO oldSize;
 	GetConsoleScreenBufferInfo(hConsole, &oldSize);
 	auto columns = oldSize.srWindow.Right - oldSize.srWindow.Left + 1;
@@ -167,7 +167,7 @@ void DisplayHighScores()
 {
 	auto players = ReadHSFile();
 	auto choice = 0;
-	int key = 0;
+	auto key = 0;
 	auto i = 1;
 	system("cls");
 	cout << endl;
@@ -198,7 +198,6 @@ void DisplayHighScores()
 	{
 		key = _getch();
 	}
-
 }
 
 void Game()
