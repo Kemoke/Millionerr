@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <consoleapi.h>
 #include <string>
 #include <iostream>
