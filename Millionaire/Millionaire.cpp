@@ -18,7 +18,6 @@ vector<Pitanje> pitanja;// lista pitanja
 void DisplayHighScores()
 {
 	auto players = ReadHSFile();
-	auto choice = 0;
 	auto key = 0;
 	auto i = 1;
 	PrintHSAscii(hConsole);
