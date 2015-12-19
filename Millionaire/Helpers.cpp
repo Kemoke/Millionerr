@@ -58,7 +58,7 @@ void HideCursor(HANDLE &hConsole)
 	SetConsoleCursorInfo(hConsole, &cursorInfo);
 }
 
-void PrintAscii(HANDLE &hConsole)
+void PrintTitleAscii(HANDLE &hConsole)
 {
 	system("cls");
 	cout << endl;
@@ -69,4 +69,16 @@ void PrintAscii(HANDLE &hConsole)
 	Center(119, hConsole); cout << " |______  /\\___  >___  >____/|__|_|  /\\___  > (____  / |__|_|  /__|____/____/__|\\____/|___|  (____  /__||__|   \\___  >\n";
 	Center(119, hConsole);
 	std::cout << "        \\/     \\/    \\/            \\/     \\/       \\/        \\/                            \\/     \\/               \\/ \n";
+}
+
+void PrintHSAscii(HANDLE &hConsole)
+{
+	system("cls");
+	cout << endl;
+	Center(70, hConsole); cout << "  ___ ___  __        __                                              \n";
+	Center(70, hConsole); cout << " /   |   \\|__| ____ |  |__   ______ ____  ___________   ____   ______\n";
+	Center(70, hConsole); cout << "/    ~    \\  |/ ___\\|  |  \\ /  ___// ___\\/  _ \\_  __ \\_/ __ \\ /  ___/\n";
+	Center(70, hConsole); cout << "\\    Y    /  / /_/  >   Y  \\\\___ \\\\  \\__(  <_> )  | \\/\\  ___/ \\___ \\ \n";
+	Center(70, hConsole); cout << " \\___|_  /|__\\___  /|___|  /____  >\\___  >____/|__|    \\___  >____  >\n";
+	Center(70, hConsole); cout << "       \\/   /_____/      \\/     \\/     \\/                  \\/     \\/ \n";
 }

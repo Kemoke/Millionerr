@@ -1,10 +1,8 @@
 ﻿#include "stdafx.h"
 #include <iostream>
 #include <string>
-#include <fstream>
 #include <tchar.h>
 #include <Windows.h>
-#include <cstdlib>
 #include <conio.h>
 #include "Pitanja.h" // Klase za pitanja
 #include <algorithm>
@@ -37,7 +35,7 @@ int MainMenu()// Funkcija za meni
 	GetConsoleScreenBufferInfo(hConsole, &oldSize);
 	auto columns = oldSize.srWindow.Right - oldSize.srWindow.Left + 1;
 	auto rows = oldSize.srWindow.Bottom - oldSize.srWindow.Top + 1;
-	PrintAscii(hConsole);
+	PrintTitleAscii(hConsole);
 	while (key != 13)// key 13 = enter
 	{
 		if (key == 80)// key 80 = strelica dole
@@ -56,7 +54,7 @@ int MainMenu()// Funkcija za meni
 		auto nrows = newSize.srWindow.Bottom - newSize.srWindow.Top + 1;
 		if (ncolumns != columns || nrows != rows)
 		{
-			PrintAscii(hConsole);
+			PrintTitleAscii(hConsole);
 		} 
 		columns = ncolumns;
 		rows = nrows;
@@ -72,14 +70,7 @@ void DisplayHighScores()
 	auto choice = 0;
 	auto key = 0;
 	auto i = 1;
-	system("cls");
-	cout << endl;
-	Center(70, hConsole); cout << "  ___ ___  __        __                                              \n";
-	Center(70, hConsole); cout << " /   |   \\|__| ____ |  |__   ______ ____  ___________   ____   ______\n";
-	Center(70, hConsole); cout << "/    ~    \\  |/ ___\\|  |  \\ /  ___// ___\\/  _ \\_  __ \\_/ __ \\ /  ___/\n";
-	Center(70, hConsole); cout << "\\    Y    /  / /_/  >   Y  \\\\___ \\\\  \\__(  <_> )  | \\/\\  ___/ \\___ \\ \n";
-	Center(70, hConsole); cout << " \\___|_  /|__\\___  /|___|  /____  >\\___  >____/|__|    \\___  >____  >\n";
-	Center(70, hConsole); cout << "       \\/   /_____/      \\/     \\/     \\/                  \\/     \\/ \n";
+	PrintHSAscii(hConsole);
 	sort(players.begin(), players.end(), SortByScore());
 	for (auto p : players)
 	{
@@ -105,7 +96,7 @@ void DisplayHighScores()
 
 void Game()
 {
-	PrintAscii(hConsole);
+	PrintTitleAscii(hConsole);
 	string name;
 	Center(40, true, hConsole); cout << "Enter your name:"; cin >> name;
 }

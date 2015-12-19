@@ -87,10 +87,3 @@ public:
 			
 	}
 };
-struct SortByScore
-{
-	bool operator() (Player const &L, Player const &R) const
-	{
-		return L.prag < R.prag;
-	}
-};

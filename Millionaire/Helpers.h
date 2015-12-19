@@ -4,4 +4,12 @@ void Center(int length, HANDLE &hConsole);
 void Center(int length, bool y, HANDLE &hConsole);
 void Center(int length, int yOffset, HANDLE &hConsole);
 void HideCursor(HANDLE &hConsole);
-void PrintAscii(HANDLE &hConsole);
+void PrintTitleAscii(HANDLE &hConsole);
+void PrintHSAscii(HANDLE &hConsole);
+struct SortByScore
+{
+	bool operator() (Player const &L, Player const &R) const
+	{
+		return L.prag < R.prag;
+	}
+};
