@@ -1,6 +1,39 @@
 #pragma once
 #include <vector>
 
+class Jokeri
+{
+public:
+	bool publika;
+	bool prijatelj;
+	bool polapola;
+	Jokeri()
+	{
+		publika = false;
+		prijatelj = false;
+		polapola = false;
+	}
+	Jokeri(bool publika, bool prijatelj, bool polapola)
+	{
+		this->publika = publika;
+		this->prijatelj = prijatelj;
+		this->polapola = polapola;
+	}
+};
+
+class Player
+{
+public:
+	std::string name;
+	int prag;
+	Jokeri jokeri;
+	Player(std::string name, int prag, Jokeri jokeri)
+	{
+		this->name = name;
+		this->prag = prag;
+		this->jokeri = jokeri;
+	}
+};
 
 class Odg
 {
@@ -52,5 +85,12 @@ public:
 			o.Provjera();
 		}
 			
+	}
+};
+struct SortByScore
+{
+	bool operator() (Player const &L, Player const &R) const
+	{
+		return L.prag < R.prag;
 	}
 };
