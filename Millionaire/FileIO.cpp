@@ -3,6 +3,8 @@
 #include "Pitanja.h"
 #include <string>
 #include "FileIO.h"
+#include <algorithm>
+#include "Helpers.h"
 
 using namespace std;
 
@@ -46,6 +48,7 @@ vector<Player> ReadHSFile()
 		players.push_back(Player(nameBuf, pragBuf, jokeri));
 	}
 	File.close();
+	sort(players.begin(), players.end(), SortByScore());
 	return players;
 }
 

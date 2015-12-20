@@ -5,7 +5,6 @@
 #include <Windows.h>
 #include <conio.h>
 #include "Pitanja.h" // Klase za pitanja
-#include <algorithm>
 #include "Helpers.h"
 #include "FileIO.h"
 #include "Menu.h"
@@ -20,7 +19,6 @@ void DisplayHighScores()
 	auto key = 0;
 	auto i = 1;
 	PrintHSAscii(hConsole);
-	sort(players.begin(), players.end(), SortByScore());
 	for (auto p : players)
 	{
 		cout << i << ". " << p.name
