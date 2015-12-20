@@ -8,28 +8,30 @@
 
 using namespace std;
 
-void PrintMenu(int choice, HANDLE hConsole)// printa meni i ASCII art :)
+void PrintMenu(int choice)// printa meni i ASCII art :)
 {
+	auto hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	string menu[3] = { "Play", "Highscores", "Quit" };
 	for (auto i = 0; i < 3; i++)
 	{
 		if (choice == i)
 			SetConsoleTextAttribute(hConsole, 240);//Ako je to izabrano oboji ga
-		Center(menu[i], i, hConsole);
+		Center(menu[i], i);
 		cout << menu[i];
 		SetConsoleTextAttribute(hConsole, 15);//Ovo ostalo vrati na staru boju
 	}
 }
 
-int MainMenu(HANDLE hConsole)// Funkcija za meni
+int MainMenu()// Funkcija za meni
 {
+	auto hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	auto choice = 0;
 	auto key = 0;
 	CONSOLE_SCREEN_BUFFER_INFO oldSize;
 	GetConsoleScreenBufferInfo(hConsole, &oldSize);
 	auto columns = oldSize.srWindow.Right - oldSize.srWindow.Left + 1;
 	auto rows = oldSize.srWindow.Bottom - oldSize.srWindow.Top + 1;
-	PrintTitleAscii(hConsole);
+	PrintTitleAscii();
 	while (key != 13)// key 13 = enter
 	{
 		if (key == 80)// key 80 = strelica dole
@@ -48,11 +50,11 @@ int MainMenu(HANDLE hConsole)// Funkcija za meni
 		auto nrows = newSize.srWindow.Bottom - newSize.srWindow.Top + 1;
 		if (ncolumns != columns || nrows != rows)
 		{
-			PrintTitleAscii(hConsole);
+			PrintTitleAscii();
 		}
 		columns = ncolumns;
 		rows = nrows;
-		PrintMenu(choice, hConsole);
+		PrintMenu(choice);
 		key = _getch();
 	}
 	return choice;// vraca odabir

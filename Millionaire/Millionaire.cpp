@@ -11,14 +11,13 @@
 
 using namespace std;
 
-HANDLE hConsole;// Handle za konzolu
-
 void DisplayHighScores()
 {
+	auto hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	auto players = ReadHSFile();
 	auto key = 0;
 	auto i = 1;
-	PrintHSAscii(hConsole);
+	PrintHSAscii();
 	for (auto p : players)
 	{
 		cout << i << ". " << p.name
@@ -33,7 +32,7 @@ void DisplayHighScores()
 		if (i == 10)
 			break;
 	}
-	Center(4, 3, hConsole);
+	Center(4, 3);
 	SetConsoleTextAttribute(hConsole, 240);
 	cout << "Back";
 	SetConsoleTextAttribute(hConsole, 15);
@@ -45,18 +44,18 @@ void DisplayHighScores()
 
 void Game()
 {
-	PrintTitleAscii(hConsole);
+	PrintTitleAscii();
 	auto pitanja = ParseQ();
 	string name;
-	Center(40, true, hConsole); cout << "Enter your name:"; cin >> name;
+	Center(40, true); cout << "Enter your name:"; cin >> name;
 }
 
 int main()
 {
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	// potrebno za meni
-	HideCursor(hConsole);
+	// potrebno za meni
+	HideCursor();
 	entry:
-	switch (MainMenu(hConsole))
+	switch (MainMenu())
 	{
 	case 0:
 		Game();

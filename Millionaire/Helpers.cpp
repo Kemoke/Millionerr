@@ -6,8 +6,9 @@
 
 using namespace std;
 
-void Center(string item, int i, HANDLE hConsole)
+void Center(string item, int i)
 {
+	auto hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(hConsole, &csbi);
 	auto columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
@@ -18,8 +19,9 @@ void Center(string item, int i, HANDLE hConsole)
 	SetConsoleCursorPosition(hConsole, csbi.dwCursorPosition);
 }
 
-void Center(int length, HANDLE hConsole)
+void Center(int length)
 {
+	auto hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(hConsole, &csbi);
 	auto columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
@@ -27,8 +29,9 @@ void Center(int length, HANDLE hConsole)
 	csbi.dwCursorPosition.X = (columns - length) / 2;
 	SetConsoleCursorPosition(hConsole, csbi.dwCursorPosition);
 }
-void Center(int length, bool y, HANDLE hConsole)
+void Center(int length, bool y)
 {
+	auto hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(hConsole, &csbi);
 	auto columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
@@ -39,8 +42,9 @@ void Center(int length, bool y, HANDLE hConsole)
 	SetConsoleCursorPosition(hConsole, csbi.dwCursorPosition);
 }
 
-void Center(int length, int yOffset, HANDLE hConsole)
+void Center(int length, int yOffset)
 {
+	auto hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(hConsole, &csbi);
 	auto columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
@@ -51,47 +55,46 @@ void Center(int length, int yOffset, HANDLE hConsole)
 	SetConsoleCursorPosition(hConsole, csbi.dwCursorPosition);
 }
 
-void HideCursor(HANDLE hConsole)
+void HideCursor()
 {
+	auto hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO cursorInfo;
 	GetConsoleCursorInfo(hConsole, &cursorInfo);
 	cursorInfo.bVisible = false;
 	SetConsoleCursorInfo(hConsole, &cursorInfo);
 }
 
-void PrintTitleAscii(HANDLE hConsole)
+void PrintTitleAscii()
 {
-	Cls(hConsole);
+	Cls();
 	cout << endl;
-	Center(119, hConsole); cout << "__________                                                      __ __   __   __                      __               \n";
-	Center(119, hConsole); cout << "\\______   \\ ____  ____  ____   _____   ____   _____      _____ |__|  | |  | |__| ____   ____ _____  |__|______  ____  \n";
-	Center(119, hConsole); cout << " |    |  _// __ \\/ ___\\/  _ \\ /     \\_/ __ \\  \\__  \\    /     \\|  |  | |  | |  |/  _ \\ /    \\\\__  \\ |  \\_  __ \\/ __ \\ \n";
-	Center(119, hConsole); cout << " |    |   \\  ___|  \\__(  <_> )  Y Y  \\  ___/   / __ \\_ |  Y Y  \\  |  |_|  |_|  (  <_> )   |  \\/ __ \\|  ||  | \\|  ___/ \n";
-	Center(119, hConsole); cout << " |______  /\\___  >___  >____/|__|_|  /\\___  > (____  / |__|_|  /__|____/____/__|\\____/|___|  (____  /__||__|   \\___  >\n";
-	Center(119, hConsole);
-	std::cout << "        \\/     \\/    \\/            \\/     \\/       \\/        \\/                            \\/     \\/               \\/ \n";
+	Center(119); cout << "__________                                                      __ __   __   __                      __               \n";
+	Center(119); cout << "\\______   \\ ____  ____  ____   _____   ____   _____      _____ |__|  | |  | |__| ____   ____ _____  |__|______  ____  \n";
+	Center(119); cout << " |    |  _// __ \\/ ___\\/  _ \\ /     \\_/ __ \\  \\__  \\    /     \\|  |  | |  | |  |/  _ \\ /    \\\\__  \\ |  \\_  __ \\/ __ \\ \n";
+	Center(119); cout << " |    |   \\  ___|  \\__(  <_> )  Y Y  \\  ___/   / __ \\_ |  Y Y  \\  |  |_|  |_|  (  <_> )   |  \\/ __ \\|  ||  | \\|  ___/ \n";
+	Center(119); cout << " |______  /\\___  >___  >____/|__|_|  /\\___  > (____  / |__|_|  /__|____/____/__|\\____/|___|  (____  /__||__|   \\___  >\n";
+	Center(119); cout << "        \\/     \\/    \\/            \\/     \\/       \\/        \\/                            \\/     \\/               \\/ \n";
 }
 
-void PrintHSAscii(HANDLE hConsole)
+void PrintHSAscii()
 {
-	Cls(hConsole);
+	Cls();
 	cout << endl;
-	Center(70, hConsole); cout << "  ___ ___  __        __                                              \n";
-	Center(70, hConsole); cout << " /   |   \\|__| ____ |  |__   ______ ____  ___________   ____   ______\n";
-	Center(70, hConsole); cout << "/    ~    \\  |/ ___\\|  |  \\ /  ___// ___\\/  _ \\_  __ \\_/ __ \\ /  ___/\n";
-	Center(70, hConsole); cout << "\\    Y    /  / /_/  >   Y  \\\\___ \\\\  \\__(  <_> )  | \\/\\  ___/ \\___ \\ \n";
-	Center(70, hConsole); cout << " \\___|_  /|__\\___  /|___|  /____  >\\___  >____/|__|    \\___  >____  >\n";
-	Center(70, hConsole); cout << "       \\/   /_____/      \\/     \\/     \\/                  \\/     \\/ \n";
+	Center(70); cout << "  ___ ___  __        __                                              \n";
+	Center(70); cout << " /   |   \\|__| ____ |  |__   ______ ____  ___________   ____   ______\n";
+	Center(70); cout << "/    ~    \\  |/ ___\\|  |  \\ /  ___// ___\\/  _ \\_  __ \\_/ __ \\ /  ___/\n";
+	Center(70); cout << "\\    Y    /  / /_/  >   Y  \\\\___ \\\\  \\__(  <_> )  | \\/\\  ___/ \\___ \\ \n";
+	Center(70); cout << " \\___|_  /|__\\___  /|___|  /____  >\\___  >____/|__|    \\___  >____  >\n";
+	Center(70); cout << "       \\/   /_____/      \\/     \\/     \\/                  \\/     \\/ \n";
 }
 
-void Cls(HANDLE hConsole)
+void Cls()
 {
+	auto hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	DWORD                      count;
 	DWORD                      cellCount;
 	COORD                      homeCoords = { 0, 0 };
-
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	if (hConsole == INVALID_HANDLE_VALUE) return;
 
 	/* Get the number of cells in the current buffer */
