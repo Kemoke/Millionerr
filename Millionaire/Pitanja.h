@@ -27,6 +27,11 @@ public:
 	std::string name;
 	int prag;
 	Jokeri jokeri;
+	Player()
+	{
+		name = "";
+		prag = 0;
+	}
 	Player(std::string name, int prag, Jokeri jokeri)
 	{
 		this->name = name;

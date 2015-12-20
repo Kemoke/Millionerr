@@ -4,6 +4,7 @@
 #include <consoleapi.h>
 #include "Helpers.h"
 #include <iostream>
+#include "Menu.h"
 
 using namespace std;
 

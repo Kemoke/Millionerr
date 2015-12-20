@@ -2,10 +2,11 @@
 #include <consoleapi.h>
 #include <string>
 #include <iostream>
+#include "Helpers.h"
 
 using namespace std;
 
-void Center(string item, int i, HANDLE &hConsole)
+void Center(string &item, int i, HANDLE &hConsole)
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(hConsole, &csbi);
@@ -60,7 +61,7 @@ void HideCursor(HANDLE &hConsole)
 
 void PrintTitleAscii(HANDLE &hConsole)
 {
-	system("cls");
+	Cls(hConsole);
 	cout << endl;
 	Center(119, hConsole); cout << "__________                                                      __ __   __   __                      __               \n";
 	Center(119, hConsole); cout << "\\______   \\ ____  ____  ____   _____   ____   _____      _____ |__|  | |  | |__| ____   ____ _____  |__|______  ____  \n";
@@ -73,7 +74,7 @@ void PrintTitleAscii(HANDLE &hConsole)
 
 void PrintHSAscii(HANDLE &hConsole)
 {
-	system("cls");
+	Cls(hConsole);
 	cout << endl;
 	Center(70, hConsole); cout << "  ___ ___  __        __                                              \n";
 	Center(70, hConsole); cout << " /   |   \\|__| ____ |  |__   ______ ____  ___________   ____   ______\n";
@@ -81,4 +82,40 @@ void PrintHSAscii(HANDLE &hConsole)
 	Center(70, hConsole); cout << "\\    Y    /  / /_/  >   Y  \\\\___ \\\\  \\__(  <_> )  | \\/\\  ___/ \\___ \\ \n";
 	Center(70, hConsole); cout << " \\___|_  /|__\\___  /|___|  /____  >\\___  >____/|__|    \\___  >____  >\n";
 	Center(70, hConsole); cout << "       \\/   /_____/      \\/     \\/     \\/                  \\/     \\/ \n";
+}
+
+void Cls(HANDLE &hConsole)
+{
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	DWORD                      count;
+	DWORD                      cellCount;
+	COORD                      homeCoords = { 0, 0 };
+
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	if (hConsole == INVALID_HANDLE_VALUE) return;
+
+	/* Get the number of cells in the current buffer */
+	if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) return;
+	cellCount = csbi.dwSize.X *csbi.dwSize.Y;
+
+	/* Fill the entire buffer with spaces */
+	if (!FillConsoleOutputCharacter(
+		hConsole,
+		static_cast<TCHAR>(' '),
+		cellCount,
+		homeCoords,
+		&count
+		)) return;
+
+	/* Fill the entire buffer with the current colors and attributes */
+	if (!FillConsoleOutputAttribute(
+		hConsole,
+		csbi.wAttributes,
+		cellCount,
+		homeCoords,
+		&count
+		)) return;
+
+	/* Move the cursor home */
+	SetConsoleCursorPosition(hConsole, homeCoords);
 }

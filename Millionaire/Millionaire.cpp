@@ -13,7 +13,6 @@
 using namespace std;
 
 HANDLE hConsole;// Handle za konzolu
-vector<Pitanje> pitanja;// lista pitanja
 
 void DisplayHighScores()
 {
@@ -25,7 +24,7 @@ void DisplayHighScores()
 	for (auto p : players)
 	{
 		cout << i << ". " << p.name
-			<< " , cash won: " << p.prag
+			<< ", cash won: " << p.prag
 			<< ", Jokers: fifty-fifty "; 
 		if (p.jokeri.polapola) cout << "not used"; else cout << "used";
 		cout << ", audience ";
@@ -47,6 +46,7 @@ void DisplayHighScores()
 void Game()
 {
 	PrintTitleAscii(hConsole);
+	auto&& pitanja = ParseQ();
 	string name;
 	Center(40, true, hConsole); cout << "Enter your name:"; cin >> name;
 }
@@ -54,19 +54,19 @@ void Game()
 int main()
 {
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	// potrebno za meni
-	pitanja = ParseQ();
 	HideCursor(hConsole);
 	entry:
 	switch (MainMenu(hConsole))
 	{
 	case 0:
 		Game();
-		goto entry;
+		break;
 	case 1:
 		DisplayHighScores();
-		goto entry;
+		break;
 	case 2:
 		return 0;
 	}
+	goto entry;
 }
 
