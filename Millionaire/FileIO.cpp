@@ -10,8 +10,7 @@ vector<Pitanje> ParseQ()// Cita pitanja i odgovore iz fajla
 {
 	// format pitanja u fileu = "pitanje tezina odg1 odg2 odg3 odg4" (staviti * ispred tacnog odg)
 	vector<Pitanje> pitanja;
-	fstream File;
-	File.open("Pitanja.txt", std::fstream::in);
+	ifstream File("Pitanja.txt");
 	string buffer;
 	while (File >> buffer)// cita text pitanja
 	{
@@ -33,8 +32,7 @@ vector<Pitanje> ParseQ()// Cita pitanja i odgovore iz fajla
 vector<Player> ReadHSFile()
 {
 	//HS file format = "name br.pitanja polapola prijatelj publika" (jokeri su ispisani ko 0/1)
-	fstream File;
-	File.open("Scores.txt", fstream::in);
+	ifstream File("Scores.txt");
 	vector<Player> players;
 	string nameBuf;
 	int pragBuf;
@@ -49,4 +47,11 @@ vector<Player> ReadHSFile()
 	}
 	File.close();
 	return players;
+}
+
+void WriteHSFile(Player player)
+{
+	ofstream File("Scores.txt", ios::app);
+	File << player.name << " " << player.prag << " " << player.jokeri.polapola << " " << player.jokeri.prijatelj << " " << player.jokeri.publika << endl;
+	File.close();
 }

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void PrintMenu(int choice, HANDLE &hConsole)// printa meni i ASCII art :)
+void PrintMenu(int choice, HANDLE hConsole)// printa meni i ASCII art :)
 {
 	string menu[3] = { "Play", "Highscores", "Quit" };
 	for (auto i = 0; i < 3; i++)
@@ -21,7 +21,7 @@ void PrintMenu(int choice, HANDLE &hConsole)// printa meni i ASCII art :)
 	}
 }
 
-int MainMenu(HANDLE &hConsole)// Funkcija za meni
+int MainMenu(HANDLE hConsole)// Funkcija za meni
 {
 	auto choice = 0;
 	auto key = 0;

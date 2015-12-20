@@ -32,6 +32,8 @@ void DisplayHighScores()
 		cout << ", friend ";
 		if (p.jokeri.prijatelj) cout << "not used\n"; else cout << "used\n";
 		i++;
+		if (i == 10)
+			break;
 	}
 	Center(4, 3, hConsole);
 	SetConsoleTextAttribute(hConsole, 240);
@@ -46,7 +48,7 @@ void DisplayHighScores()
 void Game()
 {
 	PrintTitleAscii(hConsole);
-	auto&& pitanja = ParseQ();
+	auto pitanja = ParseQ();
 	string name;
 	Center(40, true, hConsole); cout << "Enter your name:"; cin >> name;
 }

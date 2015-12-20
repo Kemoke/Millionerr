@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void Center(string &item, int i, HANDLE &hConsole)
+void Center(string item, int i, HANDLE hConsole)
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(hConsole, &csbi);
@@ -18,7 +18,7 @@ void Center(string &item, int i, HANDLE &hConsole)
 	SetConsoleCursorPosition(hConsole, csbi.dwCursorPosition);
 }
 
-void Center(int length, HANDLE &hConsole)
+void Center(int length, HANDLE hConsole)
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(hConsole, &csbi);
@@ -27,7 +27,7 @@ void Center(int length, HANDLE &hConsole)
 	csbi.dwCursorPosition.X = (columns - length) / 2;
 	SetConsoleCursorPosition(hConsole, csbi.dwCursorPosition);
 }
-void Center(int length, bool y, HANDLE &hConsole)
+void Center(int length, bool y, HANDLE hConsole)
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(hConsole, &csbi);
@@ -39,7 +39,7 @@ void Center(int length, bool y, HANDLE &hConsole)
 	SetConsoleCursorPosition(hConsole, csbi.dwCursorPosition);
 }
 
-void Center(int length, int yOffset, HANDLE &hConsole)
+void Center(int length, int yOffset, HANDLE hConsole)
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(hConsole, &csbi);
@@ -51,7 +51,7 @@ void Center(int length, int yOffset, HANDLE &hConsole)
 	SetConsoleCursorPosition(hConsole, csbi.dwCursorPosition);
 }
 
-void HideCursor(HANDLE &hConsole)
+void HideCursor(HANDLE hConsole)
 {
 	CONSOLE_CURSOR_INFO cursorInfo;
 	GetConsoleCursorInfo(hConsole, &cursorInfo);
@@ -59,7 +59,7 @@ void HideCursor(HANDLE &hConsole)
 	SetConsoleCursorInfo(hConsole, &cursorInfo);
 }
 
-void PrintTitleAscii(HANDLE &hConsole)
+void PrintTitleAscii(HANDLE hConsole)
 {
 	Cls(hConsole);
 	cout << endl;
@@ -72,7 +72,7 @@ void PrintTitleAscii(HANDLE &hConsole)
 	std::cout << "        \\/     \\/    \\/            \\/     \\/       \\/        \\/                            \\/     \\/               \\/ \n";
 }
 
-void PrintHSAscii(HANDLE &hConsole)
+void PrintHSAscii(HANDLE hConsole)
 {
 	Cls(hConsole);
 	cout << endl;
@@ -84,7 +84,7 @@ void PrintHSAscii(HANDLE &hConsole)
 	Center(70, hConsole); cout << "       \\/   /_____/      \\/     \\/     \\/                  \\/     \\/ \n";
 }
 
-void Cls(HANDLE &hConsole)
+void Cls(HANDLE hConsole)
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	DWORD                      count;
